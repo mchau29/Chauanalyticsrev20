@@ -4,10 +4,10 @@ import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 /* ─── Cyber stats strip ───────────────────────────────────────────── */
 const STATS = [
-  { label: 'CONFIDENCE_LVL', val: '95.0%' },
-  { label: 'ALPHA_THRES', val: 'α 0.05' },
-  { label: 'POWER_CALC', val: 'β 0.80' },
-  { label: 'PROTOCOL_STATE', val: 'ACTIVE' },
+  { label: 'ALPHA_THRES:', val: 'α=0.05' },
+  { label: 'POWER:', val: '1-β=0.80' },
+  { label: 'DISTRIBUTION:', val: 'GAUSSIAN' },
+  { label: 'NULL_HYPOTHESIS:', val: 'READY' },
 ];
 
 function CyberStatsBar() {
@@ -116,16 +116,16 @@ export function HomePage() {
             className="w-full h-full object-cover opacity-50"
             alt="Futuristic Lab"
           />
-          <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/60 via-black/40 to-gray-300/30" />
+          <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/80 via-black/65 to-black/40" />
         </div>
         <div className="max-w-7xl mx-auto px-5 md:px-8 relative z-10 w-full py-14 md:py-20">
           <div className="max-w-4xl">
             <div className="flex items-center gap-3 mb-6 md:mb-8">
               <span className="h-px w-8 md:w-10 bg-[#4682B4]" />
-              <span className="text-[#7ab3d4] mono text-[10px] md:text-xs tracking-widest uppercase font-bold">Laboratory-Grade Analysis</span>
+              <span className="text-[#4682B4] mono text-[10px] md:text-xs tracking-widest uppercase font-bold">Laboratory-Grade Analysis</span>
             </div>
             <h1 className="anta text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tighter leading-[0.95] md:leading-[0.9] mb-6 md:mb-8 break-words">
-              Statistical <br /> <span className="text-[#7ab3d4]">Methodology</span> for Human Research.
+              Statistical <br /> <span className="text-[#4682B4]">Methodology</span> for Human Research.
             </h1>
             <p className="text-base md:text-xl text-slate-300 leading-relaxed max-w-2xl font-light mb-10 md:mb-12 border-l-2 border-white/20 pl-5 md:pl-8">
               Where data meets discipline. Delivering the statistical analysis and study design essential to clinical, nutraceutical, and human performance science.
@@ -135,7 +135,7 @@ export function HomePage() {
                 to="/article"
                 className="group relative inline-block w-full sm:w-auto bg-[#4682B4] text-white px-8 md:px-10 py-4 md:py-5 text-xs font-bold uppercase tracking-[0.25em] overflow-hidden transition-all duration-300 text-center whitespace-nowrap"
               >
-                <span className="relative z-10 group-hover:text-[#1B1B1B] transition-colors duration-300">ABOUT BIOSTATISTICAL R&amp;D</span>
+                <span className="relative z-10 group-hover:text-[#1B1B1B] transition-colors duration-300">OUR PHILOSOPHY</span>
                 <div className="absolute inset-0 bg-white transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
               </Link>
               <div className="flex items-center gap-3 justify-center sm:justify-start">
@@ -155,7 +155,7 @@ export function HomePage() {
             <div>
               <span className="text-[#4682B4] mono text-xs tracking-[0.4em] uppercase block mb-3 md:mb-4">Domain Expertise</span>
               <h2 className="anta text-3xl md:text-4xl font-bold tracking-tight uppercase text-[#1B1B1B] leading-none">
-                Specialized<br /> <span className="text-[#4682B4]">Practice</span>
+                Specialized <span className="text-[#4682B4]">Practice</span>
               </h2>
             </div>
             <span className="text-slate-400 mono text-xs tracking-widest hidden md:block">V.2026//DEPLOY</span>
@@ -328,7 +328,7 @@ export function HomePage() {
 
                   {/* HUD label — bottom left */}
                   <div className="absolute -bottom-1 -left-[88px] hidden md:flex items-center gap-1.5">
-                    <span className="mono text-[8px] text-[#4682B4]/60 tracking-widest uppercase whitespace-nowrap">PHD_CAND</span>
+                    <span className="mono text-[8px] text-[#4682B4]/60 tracking-widest uppercase whitespace-nowrap">MS_Unit</span>
                     <div className="h-px w-6 bg-[#4682B4]/40" />
                   </div>
 
@@ -388,10 +388,10 @@ export function HomePage() {
           <p className="text-[10px] mono text-slate-500 uppercase tracking-[0.3em] mb-8 md:mb-6">STRATEGIC_ARCHITECTURE // Network_Nodes</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 text-left">
             {[
-              { src: 'https://i.ibb.co/ksxxd5Y1/o2x-inv-bw.png', alt: 'O2X', sector: 'INDUSTRIAL_HUB', name: 'O2X Human Performance' },
-              { src: 'https://i.ibb.co/0pqXk8Y0/subscience-inv-bw.png', alt: 'Substantiation', sector: 'REGULATION_SECTOR', name: 'Substantiation Sciences' },
-              { src: 'https://i.ibb.co/hxgM47kr/nova-inv-bw.png', alt: 'NSU', sector: 'INSTRUCTIONAL_CORE', name: 'Nova Southeastern University' },
-              { src: 'https://i.ibb.co/DfcCH8Pn/pkp-inv-bw.png', alt: 'PKP', sector: 'SCHOLASTIC_PATH', name: 'Phi Kappa Phi' },
+              { src: 'https://i.ibb.co/ksxxd5Y1/o2x-inv-bw.png', alt: 'O2X', sector: 'INDUSTRIAL_HUB', name: 'O2X Human Performance', subtitle: 'Research_Analytics' },
+              { src: 'https://i.ibb.co/0pqXk8Y0/subscience-inv-bw.png', alt: 'Substantiation', sector: 'REGULATION_SECTOR', name: 'Substantiation Sciences', subtitle: 'Evidence_Validation' },
+              { src: 'https://i.ibb.co/hxgM47kr/nova-inv-bw.png', alt: 'NSU', sector: 'INSTRUCTIONAL_CORE', name: 'Nova Southeastern University', subtitle: 'Quantitative_Method' },
+              { src: 'https://i.ibb.co/DfcCH8Pn/pkp-inv-bw.png', alt: 'PKP', sector: 'SCHOLASTIC_PATH', name: 'Phi Kappa Phi', subtitle: 'Merit_Distinction' },
             ].map(node => (
               <div key={node.alt} className="flex items-start gap-4 py-2">
                 <div className="flex-shrink-0 h-11 flex items-center justify-center">
@@ -400,6 +400,7 @@ export function HomePage() {
                 <div className="border-l border-white/10 pl-4">
                   <p className="text-[9px] mono text-slate-500 mb-2">{node.sector}</p>
                   <p className="text-sm mono text-slate-300 font-medium tracking-tighter uppercase">{node.name}</p>
+                  <p className="text-[9px] mono text-slate-500 mt-1">{node.subtitle}</p>
                 </div>
               </div>
             ))}
