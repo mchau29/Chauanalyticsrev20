@@ -4,10 +4,10 @@ import { ImageWithFallback } from '../components/figma/ImageWithFallback';
 
 /* ─── Cyber stats strip ───────────────────────────────────────────── */
 const STATS = [
-  { label: 'ALPHA_THRES:', val: 'α=0.05' },
-  { label: 'POWER:', val: '1-β=0.80' },
-  { label: 'DISTRIBUTION:', val: 'GAUSSIAN' },
-  { label: 'NULL_HYPOTHESIS:', val: 'READY' },
+  { label: 'CONFIDENCE_LVL', val: '95.0%' },
+  { label: 'ALPHA_THRES', val: 'α 0.05' },
+  { label: 'POWER_CALC', val: 'β 0.80' },
+  { label: 'PROTOCOL_STATE', val: 'ACTIVE' },
 ];
 
 function CyberStatsBar() {
@@ -28,10 +28,12 @@ function CyberStatsBar() {
 export function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const toggleModal = () => {
     setIsModalOpen(o => {
       document.body.style.overflow = !o ? 'hidden' : 'auto';
+      if (o) setFormStatus('idle');
       return !o;
     });
   };
@@ -56,7 +58,7 @@ export function HomePage() {
       </div>
 
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 lg:static lg:top-auto glass border-b border-black/5">
+      <nav className="sticky top-0 z-50 glass border-b border-black/5">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-1 md:py-2 flex items-center justify-between gap-4">
           <Link to="/" className="flex-shrink-0">
             <ImageWithFallback
@@ -116,16 +118,16 @@ export function HomePage() {
             className="w-full h-full object-cover opacity-50"
             alt="Futuristic Lab"
           />
-          <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/80 via-black/65 to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-b md:bg-gradient-to-r from-black/80 via-black/55 to-gray-300/30" />
         </div>
         <div className="max-w-7xl mx-auto px-5 md:px-8 relative z-10 w-full py-14 md:py-20">
           <div className="max-w-4xl">
             <div className="flex items-center gap-3 mb-6 md:mb-8">
               <span className="h-px w-8 md:w-10 bg-[#4682B4]" />
-              <span className="text-[#4682B4] mono text-[10px] md:text-xs tracking-widest uppercase font-bold">Laboratory-Grade Analysis</span>
+              <span className="text-[#7ab3d4] mono text-[10px] md:text-xs tracking-widest uppercase font-bold">Laboratory-Grade Analysis</span>
             </div>
             <h1 className="anta text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tighter leading-[0.95] md:leading-[0.9] mb-6 md:mb-8 break-words">
-              Statistical <br /> <span className="text-[#4682B4]">Methodology</span> for Human Research.
+              Statistical <br /> <span className="text-[#7ab3d4]">Methodology</span> for Human Research.
             </h1>
             <p className="text-base md:text-xl text-slate-300 leading-relaxed max-w-2xl font-light mb-10 md:mb-12 border-l-2 border-white/20 pl-5 md:pl-8">
               Where data meets discipline. Delivering the statistical analysis and study design essential to clinical, nutraceutical, and human performance science.
@@ -135,7 +137,7 @@ export function HomePage() {
                 to="/article"
                 className="group relative inline-block w-full sm:w-auto bg-[#4682B4] text-white px-8 md:px-10 py-4 md:py-5 text-xs font-bold uppercase tracking-[0.25em] overflow-hidden transition-all duration-300 text-center whitespace-nowrap"
               >
-                <span className="relative z-10 group-hover:text-[#1B1B1B] transition-colors duration-300">OUR PHILOSOPHY</span>
+                <span className="relative z-10 group-hover:text-[#1B1B1B] transition-colors duration-300">ABOUT BIOSTATISTICAL R&amp;D</span>
                 <div className="absolute inset-0 bg-white transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
               </Link>
               <div className="flex items-center gap-3 justify-center sm:justify-start">
@@ -155,7 +157,7 @@ export function HomePage() {
             <div>
               <span className="text-[#4682B4] mono text-xs tracking-[0.4em] uppercase block mb-3 md:mb-4">Domain Expertise</span>
               <h2 className="anta text-3xl md:text-4xl font-bold tracking-tight uppercase text-[#1B1B1B] leading-none">
-                Specialized <span className="text-[#4682B4]">Practice</span>
+                Specialized<br /> <span className="text-[#4682B4]">Practice</span>
               </h2>
             </div>
             <span className="text-slate-400 mono text-xs tracking-widest hidden md:block">V.2026//DEPLOY</span>
@@ -166,19 +168,22 @@ export function HomePage() {
                 src: 'https://i.ibb.co/9k6Bzh2g/pic-box1-clinical-pic.jpg',
                 alt: 'Clinical', title: 'Clinical Research',
                 body: 'Validating treatment efficacy through patient-level analysis and protocol-driven rigor.',
+                href: '/practice/clinical-research',
               },
               {
                 src: 'https://i.ibb.co/sp5yTrwf/pic-box2-nutraceutical-pic.jpg',
                 alt: 'Supplements', title: 'Nutraceutical Efficacy',
                 body: 'Mapping the impact of dietary interventions on wellness and health outcomes.',
+                href: '/practice/nutraceutical-efficacy',
               },
               {
                 src: 'https://i.ibb.co/SDHky7cq/Pic-box3-athlete.jpg',
                 alt: 'Mental Health', title: 'Human Behavior',
                 body: 'Processing performance metrics. Modeling systemic health and behavior.',
+                href: '/practice/human-behavior',
               },
             ].map(card => (
-              <div key={card.title} className="group relative min-h-[340px] sm:min-h-[400px] md:min-h-[450px] overflow-hidden bg-[#1B1B1B] flex flex-col">
+              <Link to={card.href} key={card.title} className="group relative min-h-[340px] sm:min-h-[400px] md:min-h-[450px] overflow-hidden bg-[#1B1B1B] flex flex-col">
                 <ImageWithFallback src={card.src} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt={card.alt} />
                 <div className="absolute inset-0 img-overlay" />
 
@@ -192,12 +197,11 @@ export function HomePage() {
                   <div className="bg-[#1B1B1B] p-3 md:p-4 w-full mb-3 border-l-4 border-[#4682B4] flex items-center min-h-[60px] md:min-h-[72px]">
                     <h3 className="text-[#E2E2E2] text-sm md:text-[16px] font-bold uppercase tracking-widest">{card.title}</h3>
                   </div>
-                  {/* Always visible on mobile/tablet, hover-reveal on desktop */}
                   <p className="text-white text-xs font-medium opacity-100 lg:opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-0 lg:translate-y-4 group-hover:translate-y-0 bg-black/60 p-3 md:p-4 backdrop-blur-sm">
                     {card.body}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -328,7 +332,7 @@ export function HomePage() {
 
                   {/* HUD label — bottom left */}
                   <div className="absolute -bottom-1 -left-[88px] hidden md:flex items-center gap-1.5">
-                    <span className="mono text-[8px] text-[#4682B4]/60 tracking-widest uppercase whitespace-nowrap">MS_Unit</span>
+                    <span className="mono text-[8px] text-[#4682B4]/60 tracking-widest uppercase whitespace-nowrap">PHD_CAND</span>
                     <div className="h-px w-6 bg-[#4682B4]/40" />
                   </div>
 
@@ -388,10 +392,10 @@ export function HomePage() {
           <p className="text-[10px] mono text-slate-500 uppercase tracking-[0.3em] mb-8 md:mb-6">STRATEGIC_ARCHITECTURE // Network_Nodes</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 text-left">
             {[
-              { src: 'https://i.ibb.co/ksxxd5Y1/o2x-inv-bw.png', alt: 'O2X', sector: 'INDUSTRIAL_HUB', name: 'O2X Human Performance', subtitle: 'Research_Analytics' },
-              { src: 'https://i.ibb.co/0pqXk8Y0/subscience-inv-bw.png', alt: 'Substantiation', sector: 'REGULATION_SECTOR', name: 'Substantiation Sciences', subtitle: 'Evidence_Validation' },
-              { src: 'https://i.ibb.co/hxgM47kr/nova-inv-bw.png', alt: 'NSU', sector: 'INSTRUCTIONAL_CORE', name: 'Nova Southeastern University', subtitle: 'Quantitative_Method' },
-              { src: 'https://i.ibb.co/DfcCH8Pn/pkp-inv-bw.png', alt: 'PKP', sector: 'SCHOLASTIC_PATH', name: 'Phi Kappa Phi', subtitle: 'Merit_Distinction' },
+              { src: 'https://i.ibb.co/ksxxd5Y1/o2x-inv-bw.png', alt: 'O2X', sector: 'INDUSTRIAL_HUB', name: 'O2X Human Performance' },
+              { src: 'https://i.ibb.co/0pqXk8Y0/subscience-inv-bw.png', alt: 'Substantiation', sector: 'REGULATION_SECTOR', name: 'Substantiation Sciences' },
+              { src: 'https://i.ibb.co/hxgM47kr/nova-inv-bw.png', alt: 'NSU', sector: 'INSTRUCTIONAL_CORE', name: 'Nova Southeastern University' },
+              { src: 'https://i.ibb.co/DfcCH8Pn/pkp-inv-bw.png', alt: 'PKP', sector: 'SCHOLASTIC_PATH', name: 'Phi Kappa Phi' },
             ].map(node => (
               <div key={node.alt} className="flex items-start gap-4 py-2">
                 <div className="flex-shrink-0 h-11 flex items-center justify-center">
@@ -400,7 +404,6 @@ export function HomePage() {
                 <div className="border-l border-white/10 pl-4">
                   <p className="text-[9px] mono text-slate-500 mb-2">{node.sector}</p>
                   <p className="text-sm mono text-slate-300 font-medium tracking-tighter uppercase">{node.name}</p>
-                  <p className="text-[9px] mono text-slate-500 mt-1">{node.subtitle}</p>
                 </div>
               </div>
             ))}
@@ -415,7 +418,7 @@ export function HomePage() {
             READY TO DEPLOY YOUR <span className="text-[#4682B4]">SCIENCE?</span>
           </h2>
           <button onClick={toggleModal} className="group relative w-full sm:w-auto bg-[#1B1B1B] text-[#E2E2E2] px-10 md:px-12 py-5 md:py-6 text-xs font-bold uppercase tracking-[0.4em] overflow-hidden transition-all shadow-xl">
-            <span className="relative z-10">INITIALIZE UPLINK</span>
+            <span className="relative z-10">INITIATE_INQUIRY</span>
             <div className="absolute inset-0 bg-[#4682B4] transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
           </button>
         </div>
@@ -466,20 +469,101 @@ export function HomePage() {
                 <div className="absolute inset-0 bg-[#4682B4] transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
               </button>
             </div>
-            <form action="https://api.web3forms.com/submit" method="POST" className="space-y-4 md:space-y-6">
-              <input type="hidden" name="access_key" value="900ff680-1fe5-4948-bf83-9d14ec1fa910" />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                <input type="text" name="name" required placeholder="Full Name" className="bg-white border border-black/10 p-3 md:p-4 mono text-xs w-full focus:border-[#4682B4] outline-none" />
-                <input type="text" name="organization" required placeholder="Organization" className="bg-white border border-black/10 p-3 md:p-4 mono text-xs w-full focus:border-[#4682B4] outline-none" />
-                <input type="email" name="email" required placeholder="Email" className="bg-white border border-black/10 p-3 md:p-4 mono text-xs w-full focus:border-[#4682B4] outline-none" />
-                <input type="tel" name="phone" placeholder="Phone" className="bg-white border border-black/10 p-3 md:p-4 mono text-xs w-full focus:border-[#4682B4] outline-none" />
+
+            {formStatus === 'success' ? (
+              <div className="flex flex-col items-center justify-center py-16 gap-6 text-center">
+                <div className="w-14 h-14 border-2 border-[#4682B4] flex items-center justify-center">
+                  <svg className="w-7 h-7 text-[#4682B4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="mono text-[10px] text-[#4682B4] uppercase tracking-[0.4em] mb-2">Transmission_Complete</p>
+                  <h3 className="text-xl font-bold uppercase tracking-tight text-[#1B1B1B] mb-2">Inquiry Received</h3>
+                  <p className="text-sm text-slate-500 font-light max-w-sm">
+                    Thank you for reaching out. We'll review your project details and respond within 1–2 business days.
+                  </p>
+                </div>
+                <button
+                  onClick={toggleModal}
+                  className="group relative mt-2 px-8 py-3 bg-[#1B1B1B] text-[#E2E2E2] mono text-[10px] uppercase tracking-widest overflow-hidden transition-all"
+                >
+                  <span className="relative z-10">Close_X</span>
+                  <div className="absolute inset-0 bg-[#4682B4] transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
+                </button>
               </div>
-              <textarea name="message" rows={4} required placeholder="Project Details" className="w-full bg-white border border-black/10 p-3 md:p-4 mono text-xs focus:border-[#4682B4] outline-none" />
-              <button type="submit" className="group relative w-full py-4 md:py-5 bg-[#4682B4] text-white font-bold uppercase tracking-[0.3em] text-xs overflow-hidden transition-all">
-                <span className="relative z-10">Transmit_Inquiry</span>
-                <div className="absolute inset-0 bg-[#1B1B1B] transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
-              </button>
-            </form>
+            ) : formStatus === 'error' ? (
+              <div className="flex flex-col items-center justify-center py-16 gap-6 text-center">
+                <div className="w-14 h-14 border-2 border-red-400 flex items-center justify-center">
+                  <svg className="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="mono text-[10px] text-red-400 uppercase tracking-[0.4em] mb-2">Transmission_Failed</p>
+                  <h3 className="text-xl font-bold uppercase tracking-tight text-[#1B1B1B] mb-2">Something went wrong</h3>
+                  <p className="text-sm text-slate-500 font-light max-w-sm">
+                    Please try again or reach out directly via email.
+                  </p>
+                </div>
+                <button
+                  onClick={() => setFormStatus('idle')}
+                  className="group relative mt-2 px-8 py-3 bg-[#1B1B1B] text-[#E2E2E2] mono text-[10px] uppercase tracking-widest overflow-hidden transition-all"
+                >
+                  <span className="relative z-10">Try_Again</span>
+                  <div className="absolute inset-0 bg-[#4682B4] transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
+                </button>
+              </div>
+            ) : (
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setFormStatus('sending');
+                  const formData = new FormData(e.currentTarget);
+                  try {
+                    const res = await fetch('https://api.web3forms.com/submit', {
+                      method: 'POST',
+                      body: formData,
+                    });
+                    const data = await res.json();
+                    setFormStatus(data.success ? 'success' : 'error');
+                  } catch {
+                    setFormStatus('error');
+                  }
+                }}
+                className="space-y-4 md:space-y-6"
+              >
+                <input type="hidden" name="access_key" value="900ff680-1fe5-4948-bf83-9d14ec1fa910" />
+                <input type="hidden" name="subject" value="New Inquiry — Chau Analytics" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                  <input type="text" name="name" required placeholder="Full Name" className="bg-white border border-black/10 p-3 md:p-4 mono text-xs w-full focus:border-[#4682B4] outline-none" />
+                  <input type="text" name="organization" required placeholder="Organization" className="bg-white border border-black/10 p-3 md:p-4 mono text-xs w-full focus:border-[#4682B4] outline-none" />
+                  <input type="email" name="email" required placeholder="Email" className="bg-white border border-black/10 p-3 md:p-4 mono text-xs w-full focus:border-[#4682B4] outline-none" />
+                  <input type="tel" name="phone" placeholder="Phone (optional)" className="bg-white border border-black/10 p-3 md:p-4 mono text-xs w-full focus:border-[#4682B4] outline-none" />
+                </div>
+                <textarea name="message" rows={4} required placeholder="Project Details" className="w-full bg-white border border-black/10 p-3 md:p-4 mono text-xs focus:border-[#4682B4] outline-none" />
+                <button
+                  type="submit"
+                  disabled={formStatus === 'sending'}
+                  className="group relative w-full py-4 md:py-5 bg-[#4682B4] text-white font-bold uppercase tracking-[0.3em] text-xs overflow-hidden transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-3">
+                    {formStatus === 'sending' ? (
+                      <>
+                        <svg className="w-3 h-3 animate-spin" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                        </svg>
+                        Transmitting…
+                      </>
+                    ) : 'Transmit_Inquiry'}
+                  </span>
+                  {formStatus !== 'sending' && (
+                    <div className="absolute inset-0 bg-[#1B1B1B] transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
+                  )}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       )}

@@ -1,20 +1,20 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router';
 import { ImageWithFallback } from '../components/figma/ImageWithFallback';
- 
-const STORAGE_KEY = 'chau_article_v2';
- 
+
+const STORAGE_KEY = 'chau_article_v1';
+
 const DEFAULT_CONTENT = {
-  category: 'OUR RESEARCH PHILOSOPHY',
-  title: 'The Bridge Between Data and Discovery',
-  subtitle: 'Data is rarely perfect, but your research design should be. This is my philosophy on navigating the \'messiness\' of real-world data to find the truth.',
-  body: `Most people see data as a collection of numbers. I see it as a story waiting to be told—and as a researcher, I know that if the foundation of that story isn't solid, the conclusion won't hold up to scrutiny.\n\nMy background isn't just in "crunching numbers." From my early work in mental health recovery to my current doctoral research in Health Sciences, I've spent my career observing human behavior and clinical outcomes. I understand the "messiness" of real-world data—the missing variables, the sampling biases, and the high stakes of clinical integrity.\n\nWhat I bring to your project:\n\nMy expertise lives at the intersection of two worlds: the technical precision of data science and the deep, rigorous curiosity of quantitative methodology. From modeling health outcomes across 80,000 records to designing randomized controlled trials from the ground up, I founded Chau Analytics to manage the statistical complexities and study designs that stand in the way of your progress.\n\nI'll handle the heavy lifting; you focus on the discovery. My goal is simple: to ensure your results are as robust as they are meaningful. I don't just hand over a p-value—I partner with you to design the blueprint for your success.`,
+  category: 'BIOSTATISTICAL R&D',
+  title: 'The Science Behind Biostatistical Research & Development',
+  subtitle: 'An editorial primer on methodology, study design, and the standards that make statistical findings defensible.',
+  body: `Biostatistical R&D sits at the intersection of rigorous scientific method and applied data science. Unlike exploratory analytics, this discipline demands that every inference be accountable — to the data, to the hypothesis, and ultimately to the population it represents.\n\nAt its core, biostatistics governs how we measure the effect of treatments, interventions, and behavioral exposures in human populations. Whether validating a nutraceutical compound, modeling performance trajectories, or assessing clinical trial outcomes, the statistical framework is not an afterthought — it is the architecture of truth.\n\nThe Statistical Analysis Plan (SAP) precedes any data collection. It establishes the primary and secondary endpoints, defines the analysis population, and documents every analytical decision before a single data point exists. This a priori commitment is what separates defensible science from retrofitted narrative.\n\nPower analysis determines the minimum sample size required to detect a meaningful effect with specified confidence. Inadequate power doesn't just risk a false negative — it undermines the entire evidentiary value of the study. A properly powered study with α = 0.05 and β = 0.20 sets the standard for responsible inference.\n\nMultiplicity correction, mixed-effects modeling, sensitivity analyses, and assumption diagnostics are not optional extensions — they are the baseline expectation for research that survives peer scrutiny. Chau Analytics enforces these standards across every engagement.`,
 };
- 
+
 function useAutoSave(data: typeof DEFAULT_CONTENT) {
   const [saved, setSaved] = useState(true);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
- 
+
   useEffect(() => {
     setSaved(false);
     if (timer.current) clearTimeout(timer.current);
@@ -24,10 +24,10 @@ function useAutoSave(data: typeof DEFAULT_CONTENT) {
     }, 800);
     return () => { if (timer.current) clearTimeout(timer.current); };
   }, [data]);
- 
+
   return saved;
 }
- 
+
 export function ArticlePage() {
   const [content, setContent] = useState<typeof DEFAULT_CONTENT>(() => {
     try {
@@ -37,16 +37,16 @@ export function ArticlePage() {
       return DEFAULT_CONTENT;
     }
   });
- 
+
   const saved = useAutoSave(content);
- 
+
   const update = (field: keyof typeof DEFAULT_CONTENT) => (e: React.FormEvent<HTMLElement>) => {
     setContent(c => ({ ...c, [field]: (e.currentTarget as HTMLElement).innerText }));
   };
- 
+
   return (
     <div className="antialiased min-h-screen bg-[#F7F7F5]">
- 
+
       {/* Status bar */}
       <div className="w-full bg-[#1B1B1B] text-[#E2E2E2] py-1.5 px-4 md:px-8 flex justify-between items-center border-b border-white/5">
         <div className="flex items-center gap-3">
@@ -67,9 +67,9 @@ export function ArticlePage() {
           )}
         </div>
       </div>
- 
+
       {/* Nav */}
-      <nav className="sticky top-0 z-50 lg:static lg:top-auto glass border-b border-black/5">
+      <nav className="sticky top-0 z-50 glass border-b border-black/5">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-1 md:py-2 flex items-center justify-between gap-4">
           <Link to="/" className="flex-shrink-0">
             <ImageWithFallback
@@ -82,20 +82,20 @@ export function ArticlePage() {
             to="/"
             className="group relative flex-shrink-0 flex items-center gap-2 mono text-[10px] uppercase tracking-widest text-[#E2E2E2] bg-[#1B1B1B] px-5 py-3 overflow-hidden transition-all whitespace-nowrap"
           >
-            <span className="relative z-10 flex items-center gap-2">
+            <span className="relative z-10 flex items-center gap-2 group-hover:text-[#1B1B1B] transition-colors duration-300">
               <svg className="w-3 h-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
               Back to Site
             </span>
-            <div className="absolute inset-0 bg-[#4682B4] transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-white transform translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
           </Link>
         </div>
       </nav>
- 
+
       {/* Article body */}
       <main className="max-w-3xl mx-auto px-5 md:px-8 py-12 md:py-24">
- 
+
         {/* Category tag */}
         <div
           contentEditable
@@ -105,7 +105,7 @@ export function ArticlePage() {
         >
           {content.category}
         </div>
- 
+
         {/* Title */}
         <h1
           contentEditable
@@ -115,7 +115,7 @@ export function ArticlePage() {
         >
           {content.title}
         </h1>
- 
+
         {/* Subtitle */}
         <p
           contentEditable
@@ -125,7 +125,7 @@ export function ArticlePage() {
         >
           {content.subtitle}
         </p>
- 
+
         {/* Divider with meta */}
         <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-12 pb-8 border-b border-black/8">
           <div className="flex items-center gap-2">
@@ -145,7 +145,7 @@ export function ArticlePage() {
             <span className="mono text-[9px] text-slate-500 uppercase tracking-widest">R&amp;D Editorial</span>
           </div>
         </div>
- 
+
         {/* Body — editable rich text area */}
         <div
           contentEditable
@@ -156,7 +156,7 @@ export function ArticlePage() {
         >
           {content.body}
         </div>
- 
+
         {/* Bottom sig */}
         <div className="mt-16 pt-10 border-t border-black/8 flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-4">
@@ -168,7 +168,7 @@ export function ArticlePage() {
           </Link>
         </div>
       </main>
- 
+
       {/* ── Article CTA ───────────────────────────────────────────── */}
       <section className="py-16 md:py-20 bg-[#1B1B1B] border-t border-white/5">
         <div className="max-w-4xl mx-auto px-5 md:px-6 text-center">
@@ -197,7 +197,7 @@ export function ArticlePage() {
           </div>
         </div>
       </section>
- 
+
     </div>
   );
 }
